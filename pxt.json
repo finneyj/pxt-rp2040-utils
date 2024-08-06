@@ -1,0 +1,21 @@
+{
+    "name": "pxt-rp2040-utils",
+    "version": "0.0.1",
+    "description": "MakeCode extension for low level RP2040 / Raspberry Pi Pico C/++ functions",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "rp2040-utils.ts",
+        "rp2040-utils.cpp",
+        "shims.d.ts",
+        "enums.d.ts",
+        "README.md",
+        "tsconfig.json"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": false
+}
