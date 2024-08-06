@@ -1,4 +1,7 @@
 #include "pxt.h"
+#include "pico/divider.h"
+#include "pico/stdlib.h"
+#include "hardware/vreg.h"
 
 /**
 * share
