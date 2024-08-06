@@ -10,19 +10,19 @@
 namespace rp2040utils {
 
     //%
-    int getClockFrquency()
+    int getClockFrequency()
     {
         return 1;
     }
 
     //%
-    int setClockFrquency(int frequency_khz)
+    int setClockFrequency(int frequency_khz)
     {
         return 2;
     }
 
     //%
-    int isValidClockFrquency(int frequency_khz)
+    int isValidClockFrequency(int frequency_khz)
     {
         return 3;
     }

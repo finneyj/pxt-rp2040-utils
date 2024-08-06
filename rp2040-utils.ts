@@ -9,8 +9,8 @@ namespace rp2040utils {
      * Sets the sampling frequency of the magnetic sensor
      * @param period the new sampling period in milliseconds
      */
-    //% shim=rp2040utils::getClockFrquency
-    function getClockFrquency(): number {
+    //% shim=rp2040utils::getClockFrequency
+    export function getClockFrequency(): number {
         return 1;
     }
 
@@ -18,8 +18,8 @@ namespace rp2040utils {
      * Sets the CPU clock frequency of the rp2040
      * @param frequency the requested frequency of the CPU in kHz
      */
-    //% shim=rp2040utils::setClockFrquency
-    function setClockFrquency(frequency:number): number {
+    //% shim=rp2040utils::setClockFrequency
+    export function setClockFrequency(frequency:number): number {
         return 1;
     }
 
@@ -27,8 +27,8 @@ namespace rp2040utils {
      * Tests if the given CPU clock frequency is achievable on current harwdare
      * @param frequency the requested frequency of the CPU in kHz
      */
-    //% shim=rp2040utils::setClockFrquency
-    function isValidClockFrquency(frequency:number): number {
+    //% shim=rp2040utils::isValidClockFrequency
+    export function isValidClockFrequency(frequency:number): number {
         return 1;
     }
 }
