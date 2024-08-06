@@ -1,6 +1,6 @@
 {
     "name": "pxt-rp2040-utils",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "MakeCode extension for low level RP2040 / Raspberry Pi Pico C/++ functions",
     "license": "MIT",
     "dependencies": {
