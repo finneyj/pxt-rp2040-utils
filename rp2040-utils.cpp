@@ -48,6 +48,6 @@ namespace rp2040utils {
         if (check_sys_clock_khz(freq_khz, &vco, &postdiv1, &postdiv2))
             return 1;
         
-        return 0;
+        return 3;
     }
 };
