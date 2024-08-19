@@ -100,4 +100,17 @@ namespace rp2040utils {
        
         return 0;
     }
+
+    //%
+    int poke(int address, int value) {
+        uint32_t *addr = (uint32_t *) address;
+        *addr = (uint32_t) value;
+        return 1;
+    }
+
+    //%
+    int peek(int address) {
+        uint32_t *addr = (uint32_t *) address;
+        return (int) *addr;
+    }
 };

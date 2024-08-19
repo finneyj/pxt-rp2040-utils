@@ -31,4 +31,24 @@ namespace rp2040utils {
     export function isValidClockFrequency(frequency:number): number {
         return 1;
     }
+
+    /**
+     * Writes a given 32 bit value to a given memory location
+     * @param address The 32 bit memory address to write
+     * @param value The 32 bit value to write
+     */
+    //% shim=rp2040utils::poke
+    export function poke(address:number, value:number): number {
+        return 1;
+    }
+
+     /**
+     * reads a 32 bit value from a given memory location
+     * @param address The 32 bit memory address to read
+     */
+    //% shim=rp2040utils::peek
+    export function peek(address:number): number {
+        return 1;
+    }
+
 }
