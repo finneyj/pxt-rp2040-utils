@@ -33,6 +33,15 @@ namespace rp2040utils {
     }
 
     /**
+     * Sets the QSPI FLASH clock frequency divider of the rp2040
+     * @param frequency the requested frequency of the CPU in kHz
+     */
+    //% shim=rp2040utils::setSSIFlashSpeed
+    export function setSSIFlashSpeed(ssi_clock_divider:number): number {
+        return 1;
+    }
+
+    /**
      * Writes a given 32 bit value to a given memory location
      * @param address The 32 bit memory address to write
      * @param value The 32 bit value to write

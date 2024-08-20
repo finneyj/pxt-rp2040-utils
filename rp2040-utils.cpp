@@ -101,6 +101,27 @@ namespace rp2040utils {
         return 0;
     }
 
+    REAL_TIME_FUNC
+    int _setSSIFlashSpeed(int ssi_clock_divider)
+    {
+        uint32_t RP2040_SSI_BASE = 0x18000000;
+        uint32_t* RP2040_SSI_BAUDR = (uint32_t *) (RP2040_SSI_BASE + 0x00000014);
+        uint32_t* RP2040_SSI_SSIENR = (uint32_t *) (RP2040_SSI_BASE + 0x0000008);
+
+        *RP2040_SSI_SSIENR = 0;
+        *RP2040_SSI_BAUDR = 2;
+        *RP2040_SSI_SSIENR = 1;
+
+        return 1;
+    }
+
+    //%
+    int setSSIFlashSpeed(int ssi_clock_divider)
+    {     
+        return _setSSIFlashSpeed(ssi_clock_divider);
+    }
+
+
     //%
     int poke(int address, int value) {
         uint32_t *addr = (uint32_t *) address;
