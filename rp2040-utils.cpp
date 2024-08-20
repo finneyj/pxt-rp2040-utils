@@ -101,6 +101,15 @@ namespace rp2040utils {
         return 0;
     }
 
+    static volatile int _wait_count;
+
+    REAL_TIME_FUNC
+    void _wait_a_bit()
+    {
+        for (-_wait_count = 0; _wait_count<10000; _wait_count++);
+    }
+
+
     REAL_TIME_FUNC
     int _setSSIFlashSpeed(int ssi_clock_divider)
     {
@@ -109,8 +118,11 @@ namespace rp2040utils {
         uint32_t* RP2040_SSI_SSIENR = (uint32_t *) (RP2040_SSI_BASE + 0x0000008);
 
         *RP2040_SSI_SSIENR = 0;
+        _wait_a_bit();
         *RP2040_SSI_BAUDR = ssi_clock_divider;
+        _wait_a_bit();
         *RP2040_SSI_SSIENR = 1;
+        _wait_a_bit();
 
         return 1;
     }
