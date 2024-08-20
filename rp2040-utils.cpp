@@ -108,9 +108,9 @@ namespace rp2040utils {
         volatile uint32_t* volatile RP2040_SSI_BAUDR = (uint32_t *) (RP2040_SSI_BASE + 0x00000014);
         volatile uint32_t* volatile RP2040_SSI_SSIENR = (uint32_t *) (RP2040_SSI_BASE + 0x0000008);
 
-        *RP2040_SSI_SSIENR = 0;
+        //*RP2040_SSI_SSIENR = 0;
         *RP2040_SSI_BAUDR = ssi_clock_divider;
-        *RP2040_SSI_SSIENR = 1;
+        //*RP2040_SSI_SSIENR = 1;
 
         return 1;
     }
