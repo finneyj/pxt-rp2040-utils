@@ -106,7 +106,7 @@ namespace rp2040utils {
     REAL_TIME_FUNC
     void _wait_a_bit()
     {
-        for (-_wait_count = 0; _wait_count<10000; _wait_count++);
+        for (int _wait_count = 0; _wait_count<10000; _wait_count++);
     }
 
 
