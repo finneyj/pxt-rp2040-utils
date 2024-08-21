@@ -101,17 +101,64 @@ namespace rp2040utils {
         return 0;
     }
 
+    static volatile uint32_t ssi_wait_counter = 0;
+
     REAL_TIME_FUNC
     int _setSSIFlashSpeed(int ssi_clock_divider)
     {
+        target_disable_irq();
+
+        //Configure Master by writing: 
+        // CTRLR0
+        // CTRLR1
+        // BAUDR
+        // TXFTLR
+        // RXFTLR
+        // IMR
+        // SER
+        // SPI_CTRLR0 
+
+
         uint32_t RP2040_SSI_BASE = 0x18000000;
-        volatile uint32_t* volatile RP2040_SSI_BAUDR = (uint32_t *) (RP2040_SSI_BASE + 0x00000014);
+        volatile uint32_t* volatile RP2040_SSI_CTRLR0 = (uint32_t *) (RP2040_SSI_BASE + 0x0000000);
+        volatile uint32_t* volatile RP2040_SSI_CTRLR1 = (uint32_t *) (RP2040_SSI_BASE + 0x0000004);
         volatile uint32_t* volatile RP2040_SSI_SSIENR = (uint32_t *) (RP2040_SSI_BASE + 0x0000008);
+        volatile uint32_t* volatile RP2040_SSI_BAUDR = (uint32_t *) (RP2040_SSI_BASE + 0x00000014);
+        volatile uint32_t* volatile RP2040_SSI_TXFTLR = (uint32_t *) (RP2040_SSI_BASE + 0x00000018);
+        volatile uint32_t* volatile RP2040_SSI_RXFTLR = (uint32_t *) (RP2040_SSI_BASE + 0x0000001C);
+        volatile uint32_t* volatile RP2040_SSI_IMR = (uint32_t *) (RP2040_SSI_BASE + 0x0000002C);
 
-        //*RP2040_SSI_SSIENR = 0;
+        uint32_t RP2040_SSI_CTRLR0_SAVED;
+        uint32_t RP2040_SSI_CTRLR1_SAVED;
+        uint32_t RP2040_SSI_TXFTLR_SAVED;
+        uint32_t RP2040_SSI_RXFTLR_SAVED;
+        uint32_t RP2040_SSI_IMR_SAVED;
+
+        // Save registers
+        RP2040_SSI_CTRLR0_SAVED = *RP2040_SSI_CTRLR0;
+        RP2040_SSI_CTRLR1_SAVED = *RP2040_SSI_CTRLR1;
+        RP2040_SSI_TXFTLR_SAVED = *RP2040_SSI_TXFTLR;
+        RP2040_SSI_RXFTLR_SAVED = *RP2040_SSI_RXFTLR;
+        RP2040_SSI_IMR_SAVED = *RP2040_SSI_IMR;
+
+        // Disable the peripheral
+        *RP2040_SSI_SSIENR = 0;
+        for (ssi_wait_counter = 0; ssi_wait_counter<100000; ssi_wait_counter++);
+        
+        // Set new baud rate
         *RP2040_SSI_BAUDR = ssi_clock_divider;
-        //*RP2040_SSI_SSIENR = 1;
 
+        // Restore registers
+        *RP2040_SSI_CTRLR0 = RP2040_SSI_CTRLR0_SAVED;
+        *RP2040_SSI_CTRLR1 = RP2040_SSI_CTRLR1_SAVED;
+        *RP2040_SSI_TXFTLR = RP2040_SSI_TXFTLR_SAVED;
+        *RP2040_SSI_RXFTLR = RP2040_SSI_RXFTLR_SAVED;
+        *RP2040_SSI_IMR = RP2040_SSI_IMR_SAVED;
+
+        // Enable the peripheral
+        *RP2040_SSI_SSIENR = 1;
+
+        target_enable_irq();
         return 1;
     }
 
